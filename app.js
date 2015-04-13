@@ -30,13 +30,9 @@ $(document).ready(function () {
      .attr("x", function (d, i) {
         return i * (svgWidth / frequencyData.length);
      })
-     .attr("y", 0)
-     .attr("width", svgWidth / frequencyData.length - barPadding)
-     .attr("height", function (d) {
-        return d;
-     });
+     .attr("width", svgWidth / frequencyData.length - barPadding);
 
-  // loop
+  // Loop
   function renderFrame() {
      requestAnimationFrame(renderFrame);
      // update data in frequencyData

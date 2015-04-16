@@ -23,14 +23,14 @@ $(document).ready(function () {
   var svg = createSvg('body', svgHeight, svgWidth);
 
   // Create our initial D3 chart.
-  svg.selectAll("rect")
+  svg.selectAll('rect')
      .data(frequencyData)
      .enter()
-     .append("rect")
-     .attr("x", function (d, i) {
+     .append('rect')
+     .attr('x', function (d, i) {
         return i * (svgWidth / frequencyData.length);
      })
-     .attr("width", svgWidth / frequencyData.length - barPadding);
+     .attr('width', svgWidth / frequencyData.length - barPadding);
 
   // Loop
   function renderFrame() {
@@ -38,16 +38,16 @@ $(document).ready(function () {
      // update data in frequencyData
      analyser.getByteFrequencyData(frequencyData);
      // render frame based on values in frequencyData
-     svg.selectAll("rect")
+     svg.selectAll('rect')
         .data(frequencyData)
-        .attr("y", function(d) {
+        .attr('y', function(d) {
            return svgHeight - d;
         })
-        .attr("height", function(d) {
+        .attr('height', function(d) {
            return d;
         })
-        .attr("fill", function(d) {
-           return "rgb(0, 0, " + d + ")";
+        .attr('fill', function(d) {
+           return 'rgb(0, 0, ' + d + ')';
         });
   }
 

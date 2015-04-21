@@ -5,10 +5,10 @@ $(document).ready(function () {
   var audioSrc = audioCtx.createMediaElementSource(audioElement);
   var analyser = audioCtx.createAnalyser();
 
+  // Bind our analyser to the media element source.
   audioSrc.connect(analyser);
   audioSrc.connect(audioCtx.destination);
 
-  // frequencyBinCount tells you how many values you'll receive from the analyser
   //var frequencyData = new Uint8Array(analyser.frequencyBinCount);
   var frequencyData = new Uint8Array(600);
 
@@ -32,12 +32,14 @@ $(document).ready(function () {
      })
      .attr('width', svgWidth / frequencyData.length - barPadding);
 
-  // Loop
-  function renderFrame() {
-     requestAnimationFrame(renderFrame);
-     // update data in frequencyData
+  // Continuously loop and update chart with frequency data.
+  function renderChart() {
+     requestAnimationFrame(renderChart);
+
+     // Copy frequency data to frequencyData array.
      analyser.getByteFrequencyData(frequencyData);
-     // render frame based on values in frequencyData
+
+     // Update d3 chart with new data.
      svg.selectAll('rect')
         .data(frequencyData)
         .attr('y', function(d) {
@@ -51,6 +53,7 @@ $(document).ready(function () {
         });
   }
 
-  renderFrame();
+  // Run the loop
+  renderChart();
 
 });
